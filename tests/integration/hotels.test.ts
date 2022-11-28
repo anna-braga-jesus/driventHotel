@@ -221,25 +221,25 @@ describe("GET /hotels/:hotelId", () => {
       const response = await server.get(`/hotels/${hotelId}`).set("Authorization", `Bearer ${token}`);
 
       expect(response.status).toEqual(httpStatus.OK);
-      expect(response.body).toEqual([
-        {
+      expect(response.body).toEqual(
+        expect.objectContaining({
           id: expect.any(Number),
           name: expect.any(String),
           image: expect.any(String),
-          Rooms: [
-            {
+          createdAt: expect.any(String),
+          updatedAt: expect.any(String),
+          Rooms: expect.arrayContaining([
+            expect.objectContaining({
               id: expect.any(Number),
               name: expect.any(String),
               capacity: expect.any(Number),
               hotelId: expect.any(Number),
               createdAt: expect.any(String),
               updatedAt: expect.any(String),
-            },
-          ],
-          createdAt: expect.any(String),
-          updatedAt: expect.any(String),
-        },
-      ]);
+            }),
+          ]),
+        }),
+      );
     });
     it("should respond with status 200 and Hotel Data with empty Rooms array when there are no rooms created", async () => {
       const user = await createUser();
@@ -259,16 +259,16 @@ describe("GET /hotels/:hotelId", () => {
       const response = await server.get(`/hotels/${hotelId}`).set("Authorization", `Bearer ${token}`);
 
       expect(response.status).toEqual(httpStatus.OK);
-      expect(response.body).toEqual([
-        {
+      expect(response.body).toEqual(
+        expect.objectContaining({
           id: expect.any(Number),
           name: expect.any(String),
           image: expect.any(String),
-          Rooms: [],
           createdAt: expect.any(String),
           updatedAt: expect.any(String),
-        },
-      ]);
+          Rooms: [],
+        }),
+      );
     });
   });
 });
