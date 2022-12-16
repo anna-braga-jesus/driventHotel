@@ -16,6 +16,7 @@ import {
   ticketsRouter,
   paymentsRouter,
   hotelsRouter,
+  bookingRouter
 } from "@/routers";
 import { bookingRouter } from "./routers/booking-router";
 
