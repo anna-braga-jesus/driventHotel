@@ -18,8 +18,6 @@ import {
   hotelsRouter,
   bookingRouter
 } from "@/routers";
-import { bookingRouter } from "./routers/booking-router";
-
 const app = express();
 app
   .use(cors())
